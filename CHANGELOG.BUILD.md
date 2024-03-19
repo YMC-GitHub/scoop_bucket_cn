@@ -1,1 +1,2 @@
 - build(core): support installing with setup exe
+- build(core): make ssh key and add it to this repo as deploy key

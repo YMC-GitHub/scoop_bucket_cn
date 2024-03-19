@@ -1,0 +1,1 @@
+- build(core): support installing with setup exe

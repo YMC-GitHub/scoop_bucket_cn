@@ -1,0 +1,41 @@
+{
+    "version": "1.8.8",
+    "description": "The universal proxy platform",
+    "homepage": "https://github.com/SagerNet/sing-box",
+    "license": "GPL",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/SagerNet/sing-box/releases/download/v1.8.8/sing-box-1.8.8-windows-amd64.zip",
+            "hash": "d44e6e620f16bc128f4db251a9329ec7034a84ab2834001dedbef64a245f44c0",
+            "extract_dir": "sing-box-1.8.8-windows-amd64"
+        },
+        "32bit": {
+            "url": "https://github.com/SagerNet/sing-box/releases/download/v1.8.8/sing-box-1.8.8-windows-386.zip",
+            "hash": "23842bd382a72333d7b104c453d2575da22b8090f2c061b9f7dd79845b5b3af0",
+            "extract_dir": "sing-box-1.8.8-windows-386"
+        }
+    },
+    "pre_install": [
+        "function CreateFile ($name, $value = $null) {",
+        "    if (!(Test-Path \"$persist_dir\\$name\")) {",
+        "        Set-Content \"$dir\\$name\" $value -Encoding Ascii",
+        "    }",
+        "}",
+        "CreateFile 'config.json' "
+    ],
+    "persist": "config.json",
+    "bin": "sing-box.exe",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/SagerNet/sing-box/releases/download/v$version/sing-box-$version-windows-amd64.zip",
+                "extract_dir": "sing-box-$version-windows-amd64"
+            },
+            "32bit": {
+                "url": "https://github.com/SagerNet/sing-box/releases/download/v$version/sing-box-$version-windows-386.zip",
+                "extract_dir": "sing-box-$version-windows-386"
+            }
+        }
+    }
+}

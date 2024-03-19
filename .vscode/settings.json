@@ -8,7 +8,7 @@
         }
     ],
     "files.exclude": {
-        "**/.git": true,
+        "**/.git": false,
         "**/.DS_Store": true
     }
 }

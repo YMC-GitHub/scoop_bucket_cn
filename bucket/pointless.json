@@ -9,7 +9,6 @@
       "hash": "547d640e27ff1bc9a5faf8401ae9158be8bdfea6a2381a90b1cc01d27f2f7f4f",
       "installer": {
         "script": [
-          "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
           "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Unins*\" -Force -Recurse"
         ]
       },
@@ -20,8 +19,8 @@
       ],
       "shortcuts": [
         [
-          "Clash for Windows",
-          "Pointless.exe"
+          "Pointless.exe",
+          "Pointless"
         ]
       ]
     }

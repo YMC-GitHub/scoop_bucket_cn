@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "A PNG to ICO packer written in Rust",
+  "homepage": "https://mirror.ghproxy.com/https://github.com/YMC-GitHub/pico",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://mirror.ghproxy.com/https://github.com/YMC-GitHub/pico/releases/download/1.0.0/pico-x86_64-pc-windows-msvc.exe#/dl.7z",
+      "hash": "327758ff220c820b002579ac83abf9e86a749f4e4945aad1affd7bf413b4988e",
+      "pre_install": "Get-ChildItem \"$dir\\*x86_64-pc-windows-msvc.exe\" -Recurse | Rename-Item -NewName { $_.FullName -replace '-x86_64-pc-windows-msvc.exe', 'exe' }",
+      "bin": [
+        [
+          "pico.exe"
+        ]
+      ],
+      "shortcuts": [
+        [
+          "pico.exe",
+          "pico"
+        ]
+      ]
+    }
+  },
+  "checkver": "github",
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://mirror.ghproxy.com/https://github.com/YMC-GitHub/pico/releases/download/${version}/pico-${version}-x86_64-pc-windows-msvc.exe"
+      }
+    }
+  }
+}

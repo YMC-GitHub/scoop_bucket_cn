@@ -25,7 +25,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/${version}/pico-${version}-x86_64-pc-windows-msvc.exe"
+        "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/${version}/pico-x86_64-pc-windows-msvc.exe"
       }
     }
   }

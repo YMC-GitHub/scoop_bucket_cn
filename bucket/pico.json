@@ -5,9 +5,8 @@
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/1.0.0/pico-x86_64-pc-windows-msvc.exe#/dl.7z",
-      "hash": "5efe726fecee99f2d5e2d901c77cc74f1a8a6e272a03f983c11c0f0c4c6fa8d4",
-      "post_install": "Get-ChildItem \"$dir\\*x86_64-pc-windows-msvc.exe\" -Recurse | Rename-Item -NewName { $_.FullName -replace '-x86_64-pc-windows-msvc.exe', 'exe' }",
+      "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/1.0.0/pico-x86_64-pc-windows-msvc.zip#/dl.7z",
+      "hash": "e7b6a8e0a8f25ecbe1a2e68c4a874ab9bc056a6023cc28b2aea4418c18603ef5",
       "bin": [
         [
           "pico.exe"
@@ -25,8 +24,11 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/${version}/pico-x86_64-pc-windows-msvc.exe"
+        "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/$version/pico-x86_64-pc-windows-msvc.zip"
       }
+    },
+    "hash": {
+        "url": "$url.sha256"
     }
   }
 }

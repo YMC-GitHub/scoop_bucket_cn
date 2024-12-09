@@ -1,11 +1,11 @@
 {
   "version": "0.3.0",
   "description": "free voice chat overlay for Discord ",
-  "homepage": "https://mirror.ghproxy.com/https://github.com/Hacksore/overlayed",
+  "homepage": "https://ghp.ci/https://github.com/Hacksore/overlayed",
   "license": "GPL-3.0 license",
   "architecture": {
     "64bit": {
-      "url": "https://mirror.ghproxy.com/https://github.com/Hacksore/overlayed/releases/download/v0.3.0/overlayed_0.3.0_x64-setup.exe#/dl.7z",
+      "url": "https://ghp.ci/https://github.com/Hacksore/overlayed/releases/download/v0.3.0/overlayed_0.3.0_x64-setup.exe#/dl.7z",
       "hash": "a0cd432b52dca458e37dee821f3866db6c641997b90e906203b67a0f6368e3b3",
       "installer": {
         "script": [
@@ -29,7 +29,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://mirror.ghproxy.com/https://github.com/Hacksore/overlayed/releases/download/v$version/overlayed_${version}_x64-setup.exe"
+        "url": "https://ghp.ci/https://github.com/Hacksore/overlayed/releases/download/v$version/overlayed_${version}_x64-setup.exe"
       }
     }
   }

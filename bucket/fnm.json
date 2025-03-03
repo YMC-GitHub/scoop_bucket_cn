@@ -1,12 +1,12 @@
 {
     "version": "1.35.1",
     "description": "Cross-platform Node.js version switcher",
-    "homepage": "https://ghp.ci/https://github.com/Schniz/fnm",
+    "homepage": "https://ghfast.top/https://github.com/Schniz/fnm",
     "license": "GPL-3.0-only",
     "notes": "Don't forget to add \"fnm env --use-on-cd | Out-String | Invoke-Expression\" to your powershell profile.",
     "architecture": {
         "64bit": {
-            "url": "https://ghp.ci/https://github.com/Schniz/fnm/releases/download/v1.35.1/fnm-windows.zip",
+            "url": "https://ghfast.top/https://github.com/Schniz/fnm/releases/download/v1.35.1/fnm-windows.zip",
             "hash": "f083e7256c24f359d2101934426c87e3066831a40303ebe6e538cea917a0f184"
         }
     },
@@ -15,7 +15,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://ghp.ci/https://github.com/Schniz/fnm/releases/download/v$version/fnm-windows.zip"
+                "url": "https://ghfast.top/https://github.com/Schniz/fnm/releases/download/v$version/fnm-windows.zip"
             }
         }
     }

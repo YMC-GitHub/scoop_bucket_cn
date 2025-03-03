@@ -1,11 +1,11 @@
 {
   "version": "1.0.1",
   "description": "transcribe almost every language offline",
-  "homepage": "https://ghp.ci/https://github.com/thewh1teagle/vibe",
+  "homepage": "https://ghfast.top/https://github.com/thewh1teagle/vibe",
   "license": "GPL-3.0 license",
   "architecture": {
     "64bit": {
-      "url": "https://ghp.ci/https://github.com/thewh1teagle/vibe/releases/download/v1.0.1/vibe_1.0.1_x64-setup.exe#/dl.7z",
+      "url": "https://ghfast.top/https://github.com/thewh1teagle/vibe/releases/download/v1.0.1/vibe_1.0.1_x64-setup.exe#/dl.7z",
       "hash": "c0537e24ec20a998c3e88750a749a8d121b89d4bc71c37ac0a09d59f59ab0214",
       "installer": {
         "script": [
@@ -29,7 +29,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://ghp.ci/https://github.com/thewh1teagle/vibe/releases/download/v$version/vibe_${version}_x64setup.exe"
+        "url": "https://ghfast.top/https://github.com/thewh1teagle/vibe/releases/download/v$version/vibe_${version}_x64setup.exe"
       }
     }
   }

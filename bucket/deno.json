@@ -5,18 +5,18 @@
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://ghp.ci/https://github.com/denoland/deno/releases/download/v1.43.1/deno-x86_64-pc-windows-msvc.zip",
+            "url": "https://ghfast.top/https://github.com/denoland/deno/releases/download/v1.43.1/deno-x86_64-pc-windows-msvc.zip",
             "hash": "7e49a096381cce5752f60f6ad369dec65df70d86b6b9ac87d1a4c1f4da542ce8"
         }
     },
     "bin": "deno.exe",
     "checkver": {
-        "github": "https://ghp.ci/https://github.com/denoland/deno"
+        "github": "https://ghfast.top/https://github.com/denoland/deno"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://ghp.ci/https://github.com/denoland/deno/releases/download/v$version/deno-x86_64-pc-windows-msvc.zip"
+                "url": "https://ghfast.top/https://github.com/denoland/deno/releases/download/v$version/deno-x86_64-pc-windows-msvc.zip"
             }
         }
     }

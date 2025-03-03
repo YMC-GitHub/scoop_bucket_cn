@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "description": "A PNG to ICO packer written in Rust",
-  "homepage": "https://ghp.ci/https://github.com/YMC-GitHub/pico",
+  "homepage": "https://ghfast.top/https://github.com/YMC-GitHub/pico",
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/1.0.0/pico-x86_64-pc-windows-msvc.zip#/dl.7z",
+      "url": "https://ghfast.top/https://github.com/YMC-GitHub/pico/releases/download/1.0.0/pico-x86_64-pc-windows-msvc.zip#/dl.7z",
       "hash": "e7b6a8e0a8f25ecbe1a2e68c4a874ab9bc056a6023cc28b2aea4418c18603ef5",
       "extract_dir": "pico-x86_64-pc-windows-msvc",
       "bin": [
@@ -25,7 +25,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://ghp.ci/https://github.com/YMC-GitHub/pico/releases/download/$version/pico-x86_64-pc-windows-msvc.zip",
+        "url": "https://ghfast.top/https://github.com/YMC-GitHub/pico/releases/download/$version/pico-x86_64-pc-windows-msvc.zip",
         "extract_dir": "pico-x86_64-pc-windows-msvc"
       }
     },

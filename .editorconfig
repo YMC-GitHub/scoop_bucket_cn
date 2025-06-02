@@ -14,3 +14,9 @@ trim_trailing_whitespace = true
 
 [*.{yml,yaml}]
 indent_size = 2
+
+[*.{sh,py,ts,md}]
+end_of_line = lf
+
+[*.{ps1,bat,cmd}]
+end_of_line = crlf

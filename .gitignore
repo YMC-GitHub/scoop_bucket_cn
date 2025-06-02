@@ -1,1 +1,5 @@
 *.exe
+node_modules
+*.log
+*.log.*
+*.log.*.*

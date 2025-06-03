@@ -1,0 +1,170 @@
+ARG NETWORK=cn
+ARG APT_REPO_CN=mirrors.aliyun.com
+ARG APT_REPO_GLOBAL=deb.debian.org
+ARG APT_REPO_FILE=/etc/apt/sources.list.d/debian.sources
+ARG PIP_REPO_CN=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn
+ARG PIP_REPO_GLOBAL=https://pypi.org/simple
+ARG POETRY_REPO_CN=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG POETRY_REPO_GLOBAL=https://pypi.org/simple
+
+ARG PYTHON_VERSION=3.10-slim-bookworm
+
+FROM python:${PYTHON_VERSION} as builder
+
+ENV NETWORK=${NETWORK}
+ENV APT_REPO_CN=${APT_REPO_CN}
+ENV APT_REPO_GLOBAL=${APT_REPO_GLOBAL}
+ENV APT_REPO_FILE=${APT_REPO_FILE}
+ENV PIP_REPO_CN=${PIP_REPO_CN}
+ENV PIP_REPO_GLOBAL=${PIP_REPO_GLOBAL}
+ENV POETRY_REPO_CN=${POETRY_REPO_CN}
+ENV POETRY_REPO_GLOBAL=${POETRY_REPO_GLOBAL}
+ENV PIP_INDEX_URL=${PIP_REPO_CN}
+ENV PIP_TRUSTED_HOST=${PIP_TRUSTED_HOST}
+
+# Set APT repository based on NETWORK argument
+COPY ./scripts/setup-debian.sh /usr/local/bin/setup-debian.sh
+# RUN ls -al /usr/local/bin/setup-debian.sh
+RUN chmod +x /usr/local/bin/setup-debian.sh && /usr/local/bin/setup-debian.sh set_apt_repo
+
+# Set PIP repository based on NETWORK argument
+RUN /usr/local/bin/setup-debian.sh set_pip_repo
+
+# Install Poetry with selected repo
+# RUN pip install --no-cache-dir poetry
+
+WORKDIR /app
+
+
+RUN pip install --root-user-action ignore --no-cache-dir playwright==1.52.0 && playwright install --with-deps chromium;
+# pip index versions BeautifulSoup4
+RUN pip install --root-user-action ignore --no-cache-dir BeautifulSoup4==4.13.4
+
+CMD ["python", "--version"]
+
+
+# Copy project files only if they exist
+# COPY pyproject.toml* poetry.lock* LICENSE* ./
+
+# RUN /usr/local/bin/setup-debian.sh setup_poetry
+
+
+
+# # Runtime stage - use Alpine for small size
+# FROM python:3.10-alpine
+
+# LABEL org.opencontainers.image.authors="ymc-github <yemiancheng@gmail.com>; yemiancheng <yemiancheng1993@163.com>"
+
+# WORKDIR /app
+
+# # Copy virtual environment from builder stage
+# COPY --from=builder /app/.venv /app/.venv
+
+# # Ensure the virtual environment is on the PATH
+# ENV PATH="/app/.venv/bin:$PATH"
+
+# # Copy the rest of the application code
+# COPY . .
+
+# # Run the application
+# CMD ["python", "--version"]
+
+
+# # 设置时区
+# ENV TIMEZONE=Asia/Shanghai \
+#     DEBIAN_FRONTEND=noninteractive \
+#     PIP_DISABLE_PIP_VERSION_CHECK=on \
+#     PIP_NO_CACHE_DIR=off \
+#     PIP_DEFAULT_TIMEOUT=100
+
+# # 工作目录
+# WORKDIR /app
+
+# # 网络环境参数
+# ARG NETWORK=cn \
+#     APT_REPO_CN=mirrors.aliyun.com \
+#     APT_REPO_GLOBAL=deb.debian.org \
+#     PIP_REPO_CN="https://pypi.tuna.tsinghua.edu.cn/simple"
+
+# # 针对 slim 镜像创建 sources.list 文件
+# RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
+#     echo "deb http://deb.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+#     echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+
+# # 设置阿里云 APT 源提高国内下载速度
+# RUN if [ "$NETWORK" = "cn" ]; then \
+#         sed -i "s|deb.debian.org|${APT_REPO_CN}|g" /etc/apt/sources.list && \
+#         sed -i "s|security.debian.org|${APT_REPO_CN}|g" /etc/apt/sources.list; \
+#     fi
+
+# # 更新系统并安装必要依赖
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     wget \
+#     gnupg2 \
+#     ca-certificates \
+#     fonts-liberation \
+#     libappindicator3-1 \
+#     libasound2 \
+#     libatk-bridge2.0-0 \
+#     libatk1.0-0 \
+#     libc6 \
+#     libcairo2 \
+#     libcups2 \
+#     libdbus-1-3 \
+#     libexpat1 \
+#     libfontconfig1 \
+#     libgbm1 \
+#     libgcc1 \
+#     libglib2.0-0 \
+#     libgtk-3-0 \
+#     libnspr4 \
+#     libnss3 \
+#     libpango-1.0-0 \
+#     libpangocairo-1.0-0 \
+#     libstdc++6 \
+#     libx11-6 \
+#     libx11-xcb1 \
+#     libxcb1 \
+#     libxcomposite1 \
+#     libxcursor1 \
+#     libxdamage1 \
+#     libxext6 \
+#     libxfixes3 \
+#     libxi6 \
+#     libxrandr2 \
+#     libxrender1 \
+#     libxss1 \
+#     libxtst6 \
+#     lsb-release \
+#     xdg-utils \
+#     && rm -rf /var/lib/apt/lists/*
+
+# # 设置 pip 源提高国内下载速度
+# RUN mkdir -p /root/.pip && \
+#     echo "[global]" > /root/.pip/pip.conf && \
+#     echo "index-url = ${PIP_REPO_CN}" >> /root/.pip/pip.conf && \
+#     echo "trusted-host = ${APT_REPO_CN}" >> /root/.pip/pip.conf
+
+# # 安装 Playwright 及其依赖的浏览器
+# RUN pip install --no-cache-dir playwright==1.40.0 && \
+#     playwright install --with-deps chromium && \
+#     # 清理 Playwright 安装缓存
+#     rm -rf /root/.cache/ms-playwright/*
+
+# # 复制项目文件
+# COPY . .
+
+# # 确保 .local 目录中的脚本可用
+# ENV PATH=/root/.local/bin:$PATH
+
+# # 创建非 root 用户并设置权限
+# RUN adduser -D playwright && \
+#     chown -R playwright:playwright /app
+# USER playwright
+
+# # 设置时区
+# RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /etc/timezone
+
+# # 运行命令
+# ENTRYPOINT ["python", "scripts/fresh-gh-proxy.py"]

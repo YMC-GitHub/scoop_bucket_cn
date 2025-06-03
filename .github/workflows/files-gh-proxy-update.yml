@@ -4,11 +4,16 @@ on:
   schedule:
     - cron: "0 0 * * *" # Run daily at midnight
   workflow_dispatch: # Allow manual triggering
-  paths:
-    - 'scripts/fresh-gh-proxy.py'
-    - 'scripts/ghproxy-url-latest.txt'
-    - '.github/workflows/files-gh-proxy-update.yml'
-
+  push:
+    paths:
+      - 'scripts/fresh-gh-proxy.py'
+      - 'scripts/ghproxy-url-latest.txt'
+      - '.github/workflows/files-gh-proxy-update.yml'
+  pull_request:
+    paths:
+      - 'scripts/fresh-gh-proxy.py'
+      - 'scripts/ghproxy-url-latest.txt'
+      - '.github/workflows/files-gh-proxy-update.yml'
 jobs:
   update:
     runs-on: ubuntu-latest

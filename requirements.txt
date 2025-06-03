@@ -1,0 +1,4 @@
+# pip index versions playwright
+playwright==1.52.0      # Web automation library
+beautifulsoup4==4.13.4  # Optional for HTML parsing
+pytest==7.4.0           # For testing

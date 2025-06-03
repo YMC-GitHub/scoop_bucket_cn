@@ -2,7 +2,8 @@
 *.sh linguist-language=false
 *.ps1 linguist-language=false
 *.md linguist-detectable=false
-*.py linguist-detectable=false
+*.py linguist-detectable=true
+*.ts linguist-detectable=false
 # *.js linguist-detectable=false
 *.html linguist-detectable=false
 *.css linguist-detectable=false

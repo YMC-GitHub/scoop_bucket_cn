@@ -2,12 +2,13 @@ name: files-gh-proxy-update
 
 on:
   schedule:
-    - cron: "0 0 * * *" # 每天凌晨执行一次
-  workflow_dispatch: # 允许手动触发
+    - cron: "0 0 * * *" # Run daily at midnight
+  workflow_dispatch: # Allow manual triggering
   paths:
-    # - 'bucket/**'
-    - 'scripts/update.ts'
+    - 'scripts/fresh-gh-proxy.py'
+    - 'scripts/ghproxy-url-latest.txt'
     - '.github/workflows/files-gh-proxy-update.yml'
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -16,30 +17,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          node-version: 18
+          python-version: '3.10'
 
       - name: Install dependencies
-        run: npm install typescript tsx -g
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright beautifulsoup4
+          playwright install
+          playwright install-deps
 
-      # - name: Compile TypeScript
-      #   run: tsc script.ts
-
-      - name: Run script
-        env:
-          PROXY_FILE_URL: ./scripts/ghproxy-url.txt # 替换为实际的代理文件地址
-          LOCAL_FILE_PATH: ./scripts/ghproxy-url-latest.txt # 替换为实际的本地文件路径
-        run: tsx scripts/update.ts $PROXY_FILE_URL $LOCAL_FILE_PATH
+      - name: Run fresh-gh-proxy script
+        run: python scripts/fresh-gh-proxy.py
 
       - name: Commit and push changes
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
-            git add bucket ./scripts/ghproxy-url-latest.txt ./scripts/ghproxy-url.txt
-            git commit -m "Update file content from proxy"
+            git add bucket scripts/ghproxy-url*.txt
+            git commit -m "Update GitHub proxy domains"
             git push
           else
             echo "No changes to commit"

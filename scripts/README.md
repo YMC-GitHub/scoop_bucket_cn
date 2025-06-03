@@ -86,6 +86,9 @@ tsx scripts/update.ts ./bucket ./scripts/ghproxy-url.txt ./scripts/ghproxy-url-l
 # login default wsl machine
 # wsl
 
+
+
+
 # poetry + docker (bookworm)
 prefix="zero";name="poetry-bookworm";dockerfile="Dockerfile-python";python_version="3.10-slim-bookworm";
 # poetry + docker (bullseye)
@@ -161,6 +164,8 @@ chmod +x ./scripts/*.sh;
 ./scripts/setup-pip-repos.sh
 ./scripts/setup-alpine-path.sh
 
+python ./scripts/put-apps-desc.py
+
 ./scripts/setup-alpine-all-in-one.sh set_apk_repo
 ./scripts/setup-alpine-all-in-one.sh set_pip_repo
 ./scripts/setup-alpine-all-in-one.sh dup_env_path
@@ -203,9 +208,71 @@ chmod +x ./scripts/*.sh;
 # pip list playwright BeautifulSoup4 --format=freeze
 ```
 
-## debug - python + debian(bookworm) + docker
+## sbs - python + debian(bookworm) + docker
 ```bash
 docker run --rm -it --name 3.10-slim-bookworm -w /app -v ./scripts:/app/scripts python:3.10-slim-bookworm /bin/bash
 # tree .
 # ls -al scripts/
+
+./scripts/setup-debian.sh set_apt_repo
+./scripts/setup-debian.sh setup_poetry
+
+# get python and pip version
+python --version;pip --version;poetry --version;
+
+# get pip config
+pip config list
+
+# install poetry
+# pip install --no-cache-dir poetry
+
+pip install --root-user-action ignore --no-cache-dir playwright==1.52.0 && playwright install --with-deps chromium;
+# pip index versions BeautifulSoup4
+pip install --root-user-action ignore --no-cache-dir BeautifulSoup4==4.13.4
+
+# run app
+python scripts/fresh-gh-proxy.py
+```
+
+## docker images size
+```bash
+# python:3.10-alpine vs python:3.10-slim-bookworm vs python:3.10-slim-bullseye
+
+docker pull python:3.10-slim-bookworm
+docker pull python:3.10-slim-bullseye
+docker pull python:3.10-alpine
+
+docker image ls | grep -v none | grep -E "(python|TAG)"
+
+
+```
+
+```plaintext
+REPOSITORY               TAG                  IMAGE ID       CREATED        SIZE
+python                   3.10-alpine          796b61c2fde2   3 days ago       51.7MB
+python                   3.10-slim-bookworm   e6d8b768c22f   3 weeks ago      127MB
+python                   3.10-slim-bullseye   71a2a87b1635   3 weeks ago      125MB
+
+```
+
+```bash
+docker system df
+
+# docker rm build cache:
+docker system prune -a
+# docker image prune -a
+# docker rmi $(docker images -f "dangling=true" -q)
+
+```
+
+## python + bookworm + playwright
+```bash
+prefix="playwright-python";name="-bookworm";dockerfile="Dockerfile-python";python_version="3.10-slim-bookworm";
+
+docker build --build-arg NETWORK_REGION=cn -t ${prefix}-${name}:cn -f $dockerfile .;
+
+# docker run --rm -it --name 3.10-slim-bookworm -w /app -v ./:/app/ ${prefix}-${name}:cn /bin/bash
+
+python scripts/fresh-gh-proxy.py
+
 ```

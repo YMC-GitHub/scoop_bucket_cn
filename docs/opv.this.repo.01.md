@@ -33,7 +33,7 @@ yours touch .env
 # sh -c "rm scripts/*todel*"
 ```
 
-## git commit msg
+## opv - docs files
 ```bash
 git add docs/ask.for.ai.*.md
 git commit -m "docs(core): put note"
@@ -41,16 +41,58 @@ git commit -m "docs(core): put note"
 git add docs/not.*.md
 git commit -m "docs(core): put note"
 
+git add scripts/README.md
+git commit -m "docs(core): put scripts usage"
+
+git add README.md template.README.md;
+git commit -m "build(core): put apps desc"
+
+git add docs/opv.this.repo*.md
+git commit -m "docs(core): put note for opv.this.repo"
+
+git add docs/opv.this.repo*.md
+git commit -m "docs(core): put note"
+```
+
+## opv - scripts files
+```bash
 git add scripts/update.ts
 git commit -m "build(core): use ts to update gh proxy"
 
+git add scripts/fresh-gh-proxy.py
+git commit -m "scripts(core): fresh gh proxy"
+
+git add scripts/setup-debian.sh
+git commit -m "scripts(core): use debian"
+
+git add scripts/setup*.sh
+git commit -m "scripts(core): put scripts"
+
+git add scripts/fresh-gh-proxy.py
+git commit -m "scripts(core): put screenshot name"
+
+git add scripts/fresh-gh-proxy.py
+git commit -m "scripts(core): put screenshot name"
+
+git add scripts/put-apps-desc.py
+git commit -m "scripts(core): put apps desc"
+
+```
+
+## opv - workflow files
+```bash
 git add .github/workflows/files-gh-proxy-update.yml
 git commit -m "build(core): use gh workflow to update gh proxy"
 
 git add .github/workflows/files-gh-proxy-update.yml
 git commit -m "build(core): fix workflow"
 
+git add .github/workflows/files-gh-proxy-update.yml;
+git commit -m "build(core): use py"
+```
 
+## opv - basic files
+```bash
 git add .editorconfig
 git commit -m "build(core): put eof"
 
@@ -59,8 +101,10 @@ git commit -m "build(core): put linguist-language"
 
 git add .gitignore
 git commit -m "build(core): put ignore files"
+```
 
-
+## opv - dockerfile files
+```bash
 git add Dockerfile
 git add scripts/setup-alpine-apk-repos.sh
 git add scripts/ghproxy-url*.txt
@@ -72,54 +116,26 @@ git add scripts/*.py
 git add requirements.txt
 git commit -m "build(core): dev in docker(alpine)"
 
-
-git add scripts/fresh-gh-proxy.py
-git commit -m "scripts(core): fresh gh proxy"
-
-git add scripts/setup-debian.sh
-git commit -m "scripts(core): use debian"
-
-git add scripts/setup*.sh
-git commit -m "scripts(core): put scripts"
-
-git add .github/workflows/files-gh-proxy-update.yml;
-git commit -m "build(core): use py"
-
-git add scripts/fresh-gh-proxy.py
-git commit -m "scripts(core): put screenshot name"
-
 git add pyproject.toml requirements.txt;
 git commit -m "build(core): use poetry and pyproject file"
-
-git add scripts/fresh-gh-proxy.py
-git commit -m "scripts(core): put screenshot name"
 
 git add scripts/.gitignore
 git commit -m "build(core): ignore unused files"
 
-git add scripts/README.md
-git commit -m "docs(core): put scripts usage"
-
-git add scripts/put-apps-desc.py
-git commit -m "scripts(core): put apps desc"
-
-git add README.md template.README.md;
-git commit -m "build(core): put apps desc"
-
-
 git add Dockerfile-python
 git commit -m "build(core): use python 3.10 in slim-bookworm"
 
+git add Dockerfile-python
+git commit -m "build(core): del unused code"
 
 git add .env
 git commit -m "build(core): use .enf file"
 
-git add docs/opv.this.repo*.md
-git commit -m "docs(core): put note for opv.this.repo"
+```
+## del unused file
+```bash
+# del untracked files
+git clean -fd
 
-
-git add opv.md
-git commit -m "docs(core): add dingtalk"
-
-
+git rm -f opv.md
 ```

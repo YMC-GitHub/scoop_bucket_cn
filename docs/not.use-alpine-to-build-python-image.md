@@ -1,0 +1,2 @@
+- [not alpine-docker-python](https://pythonspeed.com/articles/alpine-docker-python/)
+- [microsoft/playwright-python/issues/234](https://github.com/microsoft/playwright-python/issues/234)
